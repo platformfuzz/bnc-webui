@@ -1,0 +1,56 @@
+{
+  "name": "BNC GNSS Web UI",
+  "dockerFile": "../Dockerfile",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "v18.17.1",
+      "nodeGypDependencies": true,
+      "nvmVersion": "latest"
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.13"
+    }
+  },
+  "customizations": {
+    "settings": {
+      "files.eol": "\n",
+      "editor.formatOnSave": true,
+      "remote.extensionKind": {
+        "ms-azuretools.vscode-docker": "workspace"
+      }
+    },
+    "vscode": {
+      "extensions": [
+        "davidanson.vscode-markdownlint",
+        "esbenp.prettier-vscode",
+        "eamodio.gitlens",
+        "Gruntfuggly.todo-tree",
+        "ms-azuretools.vscode-docker",
+        "streetsidesoftware.code-spell-checker",
+        "vscode-icons-team.vscode-icons"
+      ],
+      "settings": {
+        "workbench.iconTheme": "vscode-icons"
+      }
+    }
+  },
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [5173, 8000],
+  "portsAttributes": {
+    "5173": {
+      "label": "Frontend App",
+      "onAutoForward": "openBrowser"
+    },
+    "8000": {
+      "label": "Backend API",
+      "onAutoForward": "notify"
+    }
+  },
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": ".devcontainer/scripts/postCreate.sh",
+
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  "remoteUser": "root"
+}
